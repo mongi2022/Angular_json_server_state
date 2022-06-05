@@ -30,4 +30,15 @@ host=environment.host;
     return this._http.get<Product[]>(`${this.host}/products?name_like=${keyword}`)
 
   }
+  onSelect(product:Product):Observable<Product>{
+    product.selected=!product.selected
+    return this._http.put<Product>(`${this.host}/products/${product.id}`,product)
+
+  }
+  onDelete(product:Product):Observable<void>{
+    product.selected=!product.selected
+
+   return  this._http.delete<void>(`${this.host}/products/${product.id}`)
+
+  }
 }

@@ -66,6 +66,19 @@ getSelectedProducts(){
         catchError(err=>of({dataState:Datastate.ERROR,errorMessage:err.message}))
       );
     }
-  
+    onSelect(product:Product){
+     this.productsService.onSelect(product).subscribe(data=>{
+       product.selected=data.selected
+     })
+    }
+    onDelete(product:Product){
+      let v = confirm("Etes vous sure de vouloir supprimer")
+      if(v==true){
+         this.productsService.onDelete(product).subscribe(data=>{
+        this.getAllProducts()
+      })
+      }
+     
+     }
   }
 

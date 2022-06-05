@@ -1,22 +1,6 @@
 {
   "products": [
     {
-      "id": 1,
-      "name": "Computer",
-      "price": 4300,
-      "quantity": 600,
-      "selected": true,
-      "available": true
-    },
-    {
-      "id": 2,
-      "name": "Smartphone",
-      "price": 4300,
-      "quantity": 600,
-      "selected": true,
-      "available": false
-    },
-    {
       "id": 3,
       "name": "Printer",
       "price": 4300,
@@ -33,19 +17,11 @@
       "available": false
     },
     {
-      "id": 5,
-      "name": "Microcasque",
-      "price": 1200,
-      "quantity": 600,
-      "selected": true,
-      "available": true
-    },
-    {
       "id": 6,
       "name": "Nappe",
       "price": 6300,
       "quantity": 600,
-      "selected": false,
+      "selected": true,
       "available": true
     }
   ]

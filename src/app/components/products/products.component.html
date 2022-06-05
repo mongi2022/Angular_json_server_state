@@ -5,14 +5,14 @@
 <button class="btn btn-outline-info" (click)="getAvailableProducts()">available</button>
 <br><br><br>
 <div class="container">
-<form #f ="ngForm" (ngSubmit)="onSearch(f.value)">
+<form #f ="ngForm" (ngSubmit)="onSearch(f.value)" class="form-inline">
   <div class="form-group">
     <label for="exampleInputEmail1">Search Product</label>
     <input type="text" ngModel name="keyword" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter product name">
-  
+
   </div>
   <button type="submit" class="btn btn-outline-primary"><span class="fa fa-search"></span></button>
-</form></div> 
+</form></div>
 <ng-container *ngIf="products$ | async as result" [ngSwitch]="result.dataState">
 <ng-container *ngSwitchCase="Datastate.LOADING">
   <div class="spinner-border m-5" role="status">
@@ -24,17 +24,17 @@
   <div class="alert-danger">{{result.errorMessage}}</div>
 </ng-container>
 <ng-container *ngSwitchCase="Datastate.LOADED">
-  <div class="container"> 
+  <div class="container">
   <table class="table">
       <thead>
         <tr>
           <th scope="col">id</th>
           <th scope="col">name</th>
           <th scope="col">price</th>
-          <th scope="col">quantité</th>     
+          <th scope="col">quantité</th>
            <th scope="col">selected</th>
            <th scope="col">available</th>
-    
+
         </tr>
       </thead>
       <tbody>
@@ -45,11 +45,21 @@
           <td>{{product.quantity}}</td>
           <td>{{product.selected}}</td>
           <td>{{product.available}}</td>
-    
+          <!-- update selected -->
+          <td><button (click)="onSelect(product)" [ngClass]="product.selected?'btn-success':'btn-danger'" class="btn btn-sm">
+            <span *ngIf="product.selected">Unselected</span>
+            <span *ngIf="!product.selected">Selected</span>
+
+          </button></td>
+<!-- delete selected -->
+<td><button (click)="onDelete(product)"  class="btn btn-sm btn-danger">
+  <span class="fa fa-trash-o"></span>
+
+</button></td>
         </tr>
-      
+
       </tbody>
-  
+
     </table>
   </div>
   </ng-container>
