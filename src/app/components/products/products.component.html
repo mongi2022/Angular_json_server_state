@@ -1,0 +1,56 @@
+
+<br>
+<button class="btn btn-outline-primary" (click)="getAllProducts()">All</button>&nbsp;
+<button class="btn btn-outline-success" (click)="getSelectedProducts()">selected</button>&nbsp;
+<button class="btn btn-outline-info" (click)="getAvailableProducts()">available</button>
+<br><br><br>
+<div class="container">
+<form #f ="ngForm" (ngSubmit)="onSearch(f.value)">
+  <div class="form-group">
+    <label for="exampleInputEmail1">Search Product</label>
+    <input type="text" ngModel name="keyword" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter product name">
+  
+  </div>
+  <button type="submit" class="btn btn-outline-primary"><span class="fa fa-search"></span></button>
+</form></div> 
+<ng-container *ngIf="products$ | async as result" [ngSwitch]="result.dataState">
+<ng-container *ngSwitchCase="Datastate.LOADING">
+  <div class="spinner-border m-5" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</ng-container>
+<br><br><br>
+<ng-container *ngSwitchCase="Datastate.ERROR">
+  <div class="alert-danger">{{result.errorMessage}}</div>
+</ng-container>
+<ng-container *ngSwitchCase="Datastate.LOADED">
+  <div class="container"> 
+  <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">id</th>
+          <th scope="col">name</th>
+          <th scope="col">price</th>
+          <th scope="col">quantité</th>     
+           <th scope="col">selected</th>
+           <th scope="col">available</th>
+    
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of result.data">
+          <th scope="row">{{product.id}}</th>
+          <td>{{product.name}}</td>
+          <td>{{product.price}}</td>
+          <td>{{product.quantity}}</td>
+          <td>{{product.selected}}</td>
+          <td>{{product.available}}</td>
+    
+        </tr>
+      
+      </tbody>
+  
+    </table>
+  </div>
+  </ng-container>
+
